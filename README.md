@@ -1,5 +1,7 @@
 # Reto Técnico: Procesamiento de Transacciones Bancarias (CLI)
 
+    Este reto técnico fue realizado con NodeJS versón v20.9.0 y React 19.0.0.
+
 ## Introducción:
 
     Este proyecto consiste en una aplicación  que procesa un archivo CSV con transacciones bancarias. Con 
