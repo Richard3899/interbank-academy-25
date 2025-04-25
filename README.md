@@ -1,66 +1,59 @@
 # Reto Técnico: Procesamiento de Transacciones Bancarias (CLI)
 
-## Objetivo:
+## Introducción:
 
-Desarrolla una aplicación de línea de comandos (CLI) que procese un archivo CSV con transacciones bancarias y genere un reporte que incluya:
+    Este proyecto consiste en una aplicación  que procesa un archivo CSV con transacciones bancarias. Con 
+    el objetivo de mostrar el reporte de:
 
-- **Balance Final:**  
-  Suma de los montos de las transacciones de tipo "Crédito" menos la suma de los montos de las transacciones de tipo "Débito".
+    - Balance final
+    - Transacción de mayor monto
+    - Conteo de transacciones por tipo
 
-- **Transacción de Mayor Monto:**  
-  Identificar el ID y el monto de la transacción con el valor más alto.
+    Es un reto que simula una necesidad que se puede tener en un ambito de contabilidad donde se necesita 
+    extraer datos de archivos planos y generar reportes atractivos para una mjeor toma de decciones.
 
-- **Conteo de Transacciones:**  
-  Número total de transacciones para cada tipo ("Crédito" y "Débito").
+## Instrucciones de Ejecución
+    ## Ejecutar en bash
+        git clone https://github.com/Richard3899/interbank-academy-25.git
 
----
+    ## Raiz del proyecto
+        npm install
+        npm start
 
-## Instrucciones
+    ## Ir a la aplicación
+        http://localhost:5173/
 
-1. **Repositorio Base:**  
-   Clona o haz un fork del repositorio base disponible en:  
-   `https://github.com/codeableorg/interbank-academy-25`
+## Enfoque y Solución:
 
-2. **Entrada de Datos:**  
-   La aplicación deberá leer un archivo CSV. Ejemplo de contenido:
+    Carga de archivos: Se utiliza multer para manejar la subida del archivo.
 
-   ```
-   id,tipo,monto
-   1,Crédito,100.00
-   2,Débito,50.00
-   3,Crédito,200.00
-   4,Débito,75.00
-   5,Crédito,150.00
-   ```
+    Validaciones:   Se verifica que el archivo exista y sea de tipo text/csv. 
+                    En caso de errores en el parsing, se responde con el código de error correspondiente.
 
-3. **Salida del Programa:**  
-   La aplicación debe mostrar el reporte final en la terminal.  
-   Ejemplo de salida:
+    Conversión de datos: Se usa convert-csv-to-json para convertir el contenido del archivo CSV en un array de objetos JSON, 
+                        lo que permite manipularlo fácilmente.
 
-   ```
-   Reporte de Transacciones
-   ---------------------------------------------
-   Balance Final: 325.00
-   Transacción de Mayor Monto: ID 3 - 200.00
-   Conteo de Transacciones: Crédito: 3 Débito: 2
-   ```
+    Procesamiento de información:
 
-4. **Lenguaje de Programación:**  
-   Utiliza el lenguaje de tu preferencia. Opciones recomendadas:
+        Se calcula el balance final sumando los montos de transacciones de tipo Crédito y restando los de tipo Débito.
 
-   - Python
-   - Java
-   - C#
-   - JavaScript (Node.js)
+        Se encuentra la transacción de mayor monto usando reduce, comparando los valores numéricos.
 
-5. **README del Proyecto:**  
-   Incluye un archivo `README.md` con la siguiente estructura:
+        Se cuenta el número de transacciones por tipo (Crédito y Débito) acumulando en un objeto.
 
-   - **Introducción:** Breve descripción del reto y su propósito.
-   - **Instrucciones de Ejecución:** Cómo instalar dependencias y ejecutar la aplicación.
-   - **Enfoque y Solución:** Lógica implementada y decisiones de diseño.
-   - **Estructura del Proyecto:** Archivos y carpetas principales.
+    Respuesta : Se devuelve un objeto JSON que incluye el balance, la transacción de mayor valor y el conteo por tipo. 
+    Esto permite que en la interfaz de  React lo muestre de forma amigable al usuario.
 
-6. **Documentación y Calidad del Código:**
-   - Código bien documentado y fácil de leer.
-   - Comentarios explicando pasos clave y lógica del programa.
+    Diseño: Se realizó algo simple, un input tipo file para cargar el archivo, un textarea para mostrar el resultado
+            y un botón que envia el formulario al servidor para mostrar el resultado en el textarea.
+
+## Estructura del Proyecto:
+
+    Backend: El archivo principal es server.js, en el cual se encuentra toda la logica mencionada en el punto anterior 
+            y se encuentra en la raiz de la carpeta backend.
+
+    Frontend: El archivo principal es App.jsx, aqui se muestra el diseño y la logica para el envio del formualrio al servidor,
+             y se encuentra en la carpeta Frontend dentro de la carpeta src.
+
+    Rutas: /backend/server.js
+            /frontend/src/App.jsx
